@@ -1,0 +1,7 @@
+{
+  invoicePaids(where: { payer: "%s" }, orderBy: id) {
+    id
+    dueDate
+    date
+  }
+}
