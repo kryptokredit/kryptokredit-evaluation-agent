@@ -1,0 +1,49 @@
+{
+  "wallet_address": "0x....",
+  "invoices": [
+    {
+      "id": "2000",
+      "date": "2022",
+      "amount": 1000,
+      "due_date": "2023"
+    },
+    {
+      "id": "2001",
+      "date": "2022",
+      "amount": 1000,
+      "due_date": "2023"
+    }
+  ],
+  "invoices_sent": [
+    {
+      "id": "2000",
+      "date": "2022",
+      "amount": 1000,
+      "due_date": "2023"
+    }
+  ],
+  "invoices_received": [
+    {
+      "id": "2001",
+      "date": "2022",
+      "amount": 1000,
+      "due_date": "2023"
+    }
+  ],
+  "derogetory_marks": [
+    {
+      "id": "2001"
+    },
+    {
+      "id": "2001"
+    }
+  ],
+  "invoices_paid": [
+    {
+      "id": "2001"
+    },
+    {
+      "id": "2001"
+    }
+  ]
+}
