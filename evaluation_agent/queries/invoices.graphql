@@ -1,0 +1,10 @@
+{
+  invoiceCreateds(where: { payer: "%s" }) {
+    idInvoice
+    invoicer
+    payer
+    amount
+    fee
+    paid
+  }
+}

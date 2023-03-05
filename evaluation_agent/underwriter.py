@@ -9,16 +9,16 @@ import os
 load_dotenv()
 
 
-def fetch_signal(signal_names: List[str], adapter_inputs: Dict[str, Any]) -> Dict[str, Any]:
-   """Fetch signals from the decentralized signal portfolio service.
+# def fetch_signal(signal_names: List[str], adapter_inputs: Dict[str, Any]) -> Dict[str, Any]:
+#    """Fetch signals from the decentralized signal portfolio service.
    
-   For more details about DSP service, see https://github.com/00labs/huma-signals/tree/main/huma_signals
-   """
-   request = {"signal_names": signal_names, "adapter_inputs": adapter_inputs}
-   response = requests.post(config.signals_endpoint, json=request)
-   if response.status_code != 200:
-       raise ValueError(f"Error fetching signals: {response.text}")
-   return {k: v for k, v in response.json().get("signals").items() if k in signal_names}
+#    For more details about DSP service, see https://github.com/00labs/huma-signals/tree/main/huma_signals
+#    """
+#    request = {"signal_names": signal_names, "adapter_inputs": adapter_inputs}
+#    response = requests.post(config.signals_endpoint, json=request)
+#    if response.status_code != 200:
+#        raise ValueError(f"Error fetching signals: {response.text}")
+#    return {k: v for k, v in response.json().get("signals").items() if k in signal_names}
 
 
 def underwrite(huma_pool, **kwargs):
@@ -60,7 +60,8 @@ def underwrite(huma_pool, **kwargs):
     requirements = {
         "min_credit_score": 600,
         "max_derogatory_marks": 0,
-        "min_invoice_payments": 10
+        "min_invoice_payments": 10,
+        "min_invoices": 10
     }
 
     if fetch_credit_score(borrower_wallet_address) < requirements["min_credit_score"]:
@@ -71,9 +72,12 @@ def underwrite(huma_pool, **kwargs):
 
     if fetch_invoice_payments(borrower_wallet_address) < requirements["min_invoice_payments"]:
         raise Exception("derogatoryMarks")
+    
+    if fetch_invoices(borrower_wallet_address) < requirements["min_invoices"]:
+        raise Exception("derogatoryMarks")
 
     result = {
-            "creditLimit": int(100*10**6),
+            "creditLimit": int(100),
             "intervalInDays": 30,
             "remainingPeriods": 12,
             "aprInBps": 0
